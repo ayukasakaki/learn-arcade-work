@@ -1,1 +1,5 @@
-print("hello, \n weclome to lab one \n you will most likely be bored very soon \n and I don't have anything else to say \n thanks for listening")
+print("hello")
+print("welcome to lab one")
+print("you will most likely be bored very soon")
+print("thanks for listening")
+
