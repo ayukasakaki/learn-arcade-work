@@ -1,0 +1,82 @@
+import arcade
+
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 800
+
+
+def draw_base(x, y):
+    """draw the ellipse"""
+    arcade.draw_ellipse_filled(250 + x, 150 + y, 199, 50, arcade.csscolor.BISQUE)
+    """put the triangle on top"""
+    arcade.draw_triangle_filled(250 + x, 300 + y, 150 + x, 150 + y, 350 + x, 150 + y, arcade.csscolor.BISQUE)
+    """stem of mushroom"""
+    arcade.draw_ellipse_filled(250 + x, 290 + y, 105, 120, arcade.csscolor.BISQUE)
+    arcade.draw_triangle_filled(200 + x, 284 + y, 220.15 + x, 255.22 + y, 183.8 + x, 200.71 + y, arcade.csscolor.BISQUE)
+    arcade.draw_triangle_filled(300 + x, 284 + y, 280.97 + x, 250.05 + y, 316.02 + x, 200.97 + y, arcade.csscolor.BISQUE)
+
+
+def draw_cap(x, y):
+    """cap"""
+    arcade.draw_ellipse_filled(250 + x, 330 + y, 300, 100, arcade.csscolor.THISTLE)
+    arcade.draw_ellipse_filled(250.85 + x, 389.77 + y, 190, 150, arcade.csscolor.THISTLE)
+    arcade.draw_triangle_filled(159.5 + x, 409.5 + y, 170.52 + x, 347.96 + y, 99.55 + x, 329.65 + y, arcade.csscolor.THISTLE)
+    arcade.draw_triangle_filled(345.52 + x, 396.4 + y, 310.59 + x, 349.96 + y, 399.55 + x, 329.65 + y, arcade.csscolor.THISTLE)
+    # white spots on cap
+    """arcade.draw_ellipse_filled(157.73, 336.12, 40, 20, arcade.csscolor.BISQUE)
+    arcade.draw_ellipse_filled(241.35, 404.04, 30, 20, arcade.csscolor.BISQUE)
+    arcade.draw_ellipse_filled(308.82, 369.07, 50, 20, arcade.csscolor.BISQUE)
+    arcade.draw_ellipse_filled(309.05, 431.39, 30, 20, arcade.csscolor.BISQUE)
+    arcade.draw_ellipse_filled(223.19, 344.86, 30, 20, arcade.csscolor.BISQUE)
+    arcade.draw_ellipse_filled(338.19, 336.07, 38, 20, arcade.csscolor.BISQUE)
+    arcade.draw_ellipse_filled(208.55, 437.6, 38, 20, arcade.csscolor.BISQUE)"""
+    # to be continued (i am tired of this)
+
+
+def draw_star(x, y):
+    """Draw three overlapping triangles to create a star"""
+    arcade.draw_triangle_filled(200 + x, 640 + y, 223.73 + x, 700.94 + y, 237.63 + x, 666.55 + y, arcade.csscolor.GOLD)
+    arcade.draw_triangle_filled(188.11 + x, 679.37 + y, 256.73 + x, 680.03 + y, 223.62 + x, 656.67 + y,
+                                arcade.csscolor.GOLD)
+    arcade.draw_triangle_filled(223.73 + x, 700.94 + y, 247.91 + x, 641.14 + y, 209.9 + x, 665.44 + y,
+                                arcade.csscolor.GOLD)
+
+"""def draw_snail(x,y):
+
+    arcade.draw_circle_filled(598.73 + x, 114.16 + y, 64, arcade.csscolor.SIENNA)
+    arcade.draw_arc_filled(600 + x, 50.17 + y, 300, 70, arcade.csscolor.PALE_GOLDENROD)"""
+
+def draw_mushroom(x, y):
+    """draws base then cap of mushroom"""
+    draw_base(x, y)
+    draw_cap(x, y)
+
+def on_draw(delta_time):
+    arcade.start_render()
+    arcade.draw_rectangle_filled(400, 100, 800, 200, arcade.csscolor.DARK_GREEN)
+    draw_mushroom(0, 0)
+    draw_star(0, 0)
+    draw_star(100, 20)
+    draw_star(220, 50)
+    draw_star(500, -100)
+    draw_star(200, -250)
+    draw_star(on_draw.star_x, 0)
+    draw_star(0,0)
+    on_draw.star_x += 5
+
+on_draw.star_x = 5
+
+
+def main():
+    arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Will Eventually Be Animation")
+    arcade.set_background_color(arcade.csscolor.MIDNIGHT_BLUE)
+
+
+    arcade.schedule(on_draw, 1/30)
+    arcade.run()
+
+
+
+
+
+main()
+
