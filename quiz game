@@ -1,0 +1,67 @@
+#x is the number of questions you get right
+x = 0
+
+number = int(input("what is your favorite number ? :"))
+if number == 7:
+    print("correct")
+    x += 1
+elif number > 7:
+    print("wrong")
+elif number < 7:
+    print("wrong")
+else:
+    print("can you not follow directions")
+print("Next")
+
+
+last_night = input("What did you do last night?: ")
+if last_night == "sleep" or last_night == "I slept":
+    print("correct")
+    x += 2
+else:
+    print("sleep you idiot")
+
+color = input("what is your favorite color ? :")
+if color == "blue" or color == "BLUE":
+    print("correct")
+    x += 1
+elif color == "green" or color == "GREEN":
+    print("correct")
+else:
+    print("wrong")
+print("Next")
+
+age = int(input("how old are you? :"))
+if age == 14:
+    print("yikes, but correct")
+    x += 1
+elif age > 45:
+    print("enjoy those few years you've got left")
+elif age < 20:
+    print("child")
+else:
+    print("ok then")
+print("Next")
+
+
+height = input("how tall are you? :")
+if height == "6 feet":
+    print("nice")
+    x += 1
+else:
+    print("ok then")
+print("Next")
+
+if x==1:
+    print ("you got 20%")
+elif x==2:
+    print("you got 40%")
+elif x==3:
+    print("you got 60%")
+elif x ==4:
+    print ("you got 80%")
+elif x==5:
+    print("you got 100%")
+else:
+    print ("you failed")
+print("The End")
