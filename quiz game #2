@@ -1,0 +1,73 @@
+x = 0
+"Welcome to my quiz on random facts about space."
+number = int(input("how long does it take light to travel from the sun to the Earth (round to nearest whole number) ? :"))
+if number == 8:
+    print("correct")
+    x += 1
+elif number > 8:
+    print("too high")
+elif number < 8:
+    print("too low")
+else:
+    print("please input valid answer")
+print("Next")
+
+
+last_night = input("What are the 3 largest constellations to be viewed from Earth (in order):?: ")
+if last_night == "hydra, virgo, ursa major" or last_night == "Hydra, Virgo, Ursa Major":
+    print("correct")
+    x += 2
+else:
+    print("the answer is Hydra, Virgo, and Ursa Major.")
+
+color = input("which planets in our solar system appear blue? (please use captials for planet names and seperate them "
+              "with the word 'and' :")
+if color == "Neptune and Uranus" or color == "Uranus and Neptune":
+    print("correct")
+    x += 1
+else:
+    print("incorrect.")
+print("Next")
+
+pluto_orbit = int(input("how long does it take for pluto to make a orbit around the sun? :"))
+if pluto_orbit == 248:
+    print("correct. Non of us will experience a full pluto orbit in our lifetime.")
+    x += 1
+elif pluto_orbit > 248:
+    print("too high")
+elif pluto_orbit < 248:
+    print("too low")
+else:
+    print("please input valid answer")
+print("Next")
+
+
+
+
+
+multiple_choice = input("what is hawking radiation? a) the black body radiation which is emitted by black holes, "
+                        "due to quantum effects near the event horizon, b) a form of radiation released by the element "
+                        "hassium, c) a type of bomb :")
+if multiple_choice == "a":
+    print("correct")
+elif multiple_choice == "b":
+    print("no, although hassium is highly radioactive")
+elif multiple_choice == "c":
+    print("incorrect. Bombs are usually classified by the type of damage they inflict.")
+else:
+    print("please input a valid answer.")
+
+if x == 1:
+    print("you got 20%")
+elif x==2:
+    print("you got 40%")
+elif x==3:
+    print("you got 60%")
+elif x ==4:
+    print ("you got 80%")
+elif x==5:
+    print("you got 100%")
+else:
+    print("you failed")
+
+print("The End")
