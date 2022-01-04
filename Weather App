@@ -1,0 +1,116 @@
+# imports arcade for drawing and requests for getting api data
+
+import arcade
+import requests
+
+# defines weather setup, a function that draws the basic setup for the window were the data will be presented
+
+
+def weather_setup():
+    arcade.draw_text("Showing Weather for ", 120, 750, arcade.csscolor.BLACK, 15)
+    arcade.draw_rectangle_filled(300, 270, 400, 400, (255, 255, 255, 150), 0)
+    arcade.draw_text("Current Temperature (ºF): ", 140, 425, arcade.csscolor.BLACK, 12)
+    arcade.draw_text("Feels Like (ºF): ", 140, 350, arcade.csscolor.BLACK, 12)
+    arcade.draw_text("Temperature Maximum (ºF): ", 140, 275, arcade.csscolor.BLACK, 12)
+    arcade.draw_text("Temperature Minimum (ºF): ", 140, 200, arcade.csscolor.BLACK, 12)
+    arcade.draw_text("Current Wind Speed (mph): ", 140, 125, arcade.csscolor.BLACK, 12)
+
+# this is a function that will draw a cloud
+
+
+def draw_cloud(x, y):
+    arcade.draw_circle_filled(300 + x, 500 + y, 40, arcade.csscolor.WHITE)
+    arcade.draw_circle_filled(249 + x, 480 + y, 30, arcade.csscolor.WHITE)
+    arcade.draw_circle_filled(348 + x, 483 + y, 30, arcade.csscolor.WHITE)
+
+# defines weather data, a function that converts the floats of the variables into strings and draws then onto the screen
+
+
+def weather_data():
+    arcade.draw_text(str(userChoice), 315, 750, arcade.csscolor.BLACK, 15)
+    arcade.draw_text(str(current_temp), 400, 425, arcade.csscolor.BLACK)
+    arcade.draw_text(str(current_feels), 400, 350, arcade.csscolor.BLACK)
+    arcade.draw_text(str(temp_max), 400, 275, arcade.csscolor.BLACK)
+    arcade.draw_text(str(temp_min), 400, 200, arcade.csscolor.BLACK)
+    arcade.draw_text(str(wind_speed), 400, 125, arcade.csscolor.BLACK)
+
+# defines userChoice as the input to the following question in parentheses
+
+
+userChoice = input("Enter city name to see weather: ")
+
+# defines response as the result of the imported api, with imperial units
+# userChoice in curly brackets makes it so that the result of userChoice will become the location who's data is gotten
+
+
+response = requests.get(
+        f'https://api.openweathermap.org/data/2.5/weather?q={userChoice}&units=imperial&APPID'
+        f'=ae76476d05b4fccab87ac3e0ce791e71')
+
+# if response.ok is stating the conditional "if the result of response is not an error" i.e. userChoice is a place in
+# the api's database
+# if the response is ok then some variables are created to represent the numerical value of the temperature, etc.
+
+if response.ok:
+    current_temp = response.json()['main']['temp']
+    temp_min = response.json()['main']['temp_min']
+    temp_max = response.json()['main']['temp_max']
+    current_feels = response.json()['main']['feels_like']
+    weather = response.json()['weather'][0]['main']
+    wind_speed = response.json()['wind']['speed']
+
+# if weather is equal to clouds, open a window with said parameters and draw a cloud. Then run weather_data()
+
+    if weather == "Clouds":
+        arcade.open_window(600, 800, "Today's Weather")
+        arcade.set_background_color((85, 88, 97))
+        arcade.start_render()
+        weather_setup()
+        draw_cloud(0, 100)
+        weather_data()
+        arcade.finish_render()
+
+# if weather is equal to rain, open a window with said parameters and draw a rain cloud. Then run weather_data()
+
+    if weather == "Rain":
+        arcade.open_window(600, 800, "Today's Weather")
+        arcade.set_background_color((85, 88, 97))
+        arcade.start_render()
+        weather_setup()
+        for row in range(15):
+            for column in range(7):
+                x = 237
+                y = 510
+                arcade.draw_rectangle_filled(x + 20 * column, y + 10 * row, 5, 5, arcade.color.BLUE)
+        draw_cloud(0, 190)
+        weather_data()
+        arcade.finish_render()
+
+# if weather is equal to clear, open a window with said parameters and draw a sun. Then run weather_data()
+
+    if weather == "Clear":
+        arcade.open_window(600, 800, "Today's Weather")
+        arcade.set_background_color((35, 164, 250))
+        arcade.start_render()
+        arcade.draw_circle_filled(300, 600, 80, arcade.color.YELLOW)
+        weather_setup()
+        weather_data()
+        arcade.finish_render()
+
+# if weather is equal to rain, open a window with said parameters and draw a little snowman. Then run weather_data()
+
+    if weather == "Snow":
+        arcade.open_window(600, 800, "Today's Weather")
+        arcade.set_background_color((85, 88, 97))
+        arcade.start_render()
+        arcade.draw_circle_filled(300, 590, 50, arcade.color.WHITE)
+        arcade.draw_circle_filled(300, 650, 40, arcade.color.WHITE)
+        weather_setup()
+        weather_data()
+        arcade.finish_render()
+
+    arcade.run()
+
+# if response is not ok, print this statement
+else:
+    print("Invalid location OR location not entered")
